@@ -1,0 +1,85 @@
+// DAZ Studio version 4.20.0.17 filetype DAZ Script
+
+    // Define an anonymous function;
+    // serves as our main loop,
+    // limits the scope of variables
+    (function(){
+     
+    	/*********************************************************************/
+    	// Array<String> : A function for recursively collecting the paths of
+    	// definition files that can be accessed from the Render Scripts property
+    	// of the Scripted 3Delight renderer
+    	function scriptedRendererScriptRecurse( sPath )
+    	{
+    		// Create a directory object for the 'current' path
+    		var oDir = new DzDir( sPath );
+    		// Get a list of names for directories in 'this' directory
+    		var aDirNames = oDir.entryList( "*",
+    			DzDir.Dirs | DzDir.NoSymLinks | DzDir.NoDotAndDotDot, DzDir.Name );
+    		// Get the number of names found
+    		var nDirs = aDirNames.length;
+     
+    		// If there are no subdirectories
+    		if( nDirs == 0 ){
+    			// Create a script object
+    			var oScript = new DzScript();
+    			// Construct the base path of the script we want
+    			var sBasePath = String("%1/%2")
+    				.arg( oDir.path() ).arg( oDir.dirName() );
+    			// Get the path of our definition script. Doing it this way,
+    			// we can find an ascii file or a binary [encrypted] file
+    			// without having to manually handle the file extensions.
+    			var sScript = oScript.getScriptFile( sBasePath );
+     
+    			// If a script was not found
+    			if( sScript == sBasePath ){
+    				// We are done...
+    				return []
+    			}
+     
+    			// Return the path of a script that can be accessed
+    			return [ sScript ];
+    		}
+     
+    		// Initialize an array for collecting as we recurse
+    		var aDefinitionScripts = [];
+     
+    		// Declare working variables
+    		var sDirName;
+    		var sSubPath;
+     
+    		// Iterate over the directory names
+    		for( var i = 0; i < nDirs; i += 1 ){
+    			// Get the 'current' name
+    			sDirName = aDirNames[ i ];
+    			// Construct the path of the subdirectory
+    			sSubPath = String("%1/%2").arg( oDir.path() ).arg( sDirName );
+     
+    			// Recurse and append any additional scripts we find
+    			aDefinitionScripts = aDefinitionScripts.concat(
+    				scriptedRendererScriptRecurse( sSubPath ) );
+    		}
+     
+    		// Return the collected scripts
+    		return aDefinitionScripts;
+    	};
+     
+    	/*********************************************************************/
+    	// Array<String> : A function for collecting the paths of definition files
+    	// that can be accessed from the Render Scripts property of the Scripted
+    	// 3Delight renderer
+    	function scriptedRendererDefinitionScripts()
+    	{
+    		// Construct the base path for definition files
+    		var sBasePath = String("%1/Scripted Renderer").arg( App.getResourcesPath() );
+    		// Recurse the path and return the results
+    		return scriptedRendererScriptRecurse( sBasePath );
+    	};
+     
+    	/*********************************************************************/
+    	// Provide feedback to the console/log
+    	print( scriptedRendererDefinitionScripts().join("\n") );
+     
+    // Finalize the function and invoke
+    })();
+

@@ -1,0 +1,96 @@
+{
+    "focal_length_50" : {
+        "extra_long_shot": {
+            "distance": 5000,
+            "height": 136,
+            "bone": "spine_05"
+        },
+        "long_shot": {
+            "distance": 1100,
+            "height": 80,
+            "bone": "spine_05"
+        },
+        "full_shot": {
+            "distance": 750,
+            "height": 80,
+            "bone": "spine_05"
+        },
+        "medium_wide_shot": {
+            "distance": 500,
+            "height": 115,
+            "bone": "spine_05"
+        },
+        "cowboy_shot": {
+            "distance": 500,
+            "height": 120,
+            "bone": "spine_05"
+        },
+        "medium_shot": {
+            "distance": 250,
+            "height": 136,
+            "bone": "spine_05"
+        },
+        "medium_close_up": {
+            "distance": 150,
+            "height": 150,
+            "bone": "head"
+        },
+        "close_up": {
+            "distance": 80,
+            "height": 155,
+            "bone": "head"
+        },
+        "extreme_close_up": {
+            "distance": 30,
+            "height": 157,
+            "bone": "head"
+        }
+    },
+    "focal_length_500": {
+        "extra_long_shot": {
+            "distance": 15000,
+            "height": 136,
+            "bone": "spine_05"
+        },
+        "long_shot": {
+            "distance": 10000,
+            "height": 80,
+            "bone": "spine_05"
+        },
+        "full_shot": {
+            "distance": 7500,
+            "height": 80,
+            "bone": "spine_05"
+        },
+        "medium_wide_shot": {
+            "distance": 5000,
+            "height": 115,
+            "bone": "spine_05"
+        },
+        "cowboy_shot": {
+            "distance": 4000,
+            "height": 120,
+            "bone": "spine_05"
+        },
+        "medium_shot": {
+            "distance": 2500,
+            "height": 136,
+            "bone": "spine_05"
+        },
+        "medium_close_up": {
+            "distance": 1500,
+            "height": 150,
+            "bone": "head"
+        },
+        "close_up": {
+            "distance": 800,
+            "height": 157,
+            "bone": "head"
+        },
+        "extreme_close_up": {
+            "distance": 300,
+            "height": 157,
+            "bone": "head"
+        }
+    }
+}

@@ -1,0 +1,9 @@
+**/.idea
+x-generated
+**/__pycache__
+**/DerivedDataCache
+**/Intermediate
+**/Saved
+**/Build
+**/.vscode
+**/Binaries

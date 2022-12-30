@@ -1,0 +1,1 @@
+C:/s8n/system/tools/ffmpeg/bin/ffmpeg.exe -r 30 -f image2 -s 3840x2160 -i C:/src/space/ue-samples/mixamodaz004/Saved/MovieRenders/back-front-01.%%04d.jpeg -vcodec libx264 -crf 1  tmp_mp4/back-front-01-4k.mp4

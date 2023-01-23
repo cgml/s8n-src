@@ -8,10 +8,7 @@ class GoldenData:
             "players": {
                 "PlayerA": {
                     "title": "The Wellness Warrior",
-                    "description": """She's all about self-care and living a healthy, balanced lifestyle. 
-                    Her days start with a green smoothie and yoga session, followed by a nutritious breakfast and plenty of water throughout the day. 
-                    She enjoys regular workouts, either at the gym or outside in nature, and always makes time for relaxation and stress-relief. 
-                    Her diet is clean and wholesome, but she also enjoys indulging in the occasional luxurious treat."""
+                    "description": """She's all about self-care and living a healthy, balanced lifestyle. Her days start with a green smoothie and yoga session, followed by a nutritious breakfast and plenty of water throughout the day. She enjoys regular workouts, either at the gym or outside in nature, and always makes time for relaxation and stress-relief. Her diet is clean and wholesome, but she also enjoys indulging in the occasional luxurious treat."""
                 },
             },
             "chapters": [
@@ -576,44 +573,7 @@ class GoldenData:
 
     #######################################################################
     # Storybooard
-    storyboard = {
-        {
-            "scene": "scene_0000",
-            "total_scene_range": (0, 300),
-            "fps": 30,
-            "level_path": "/Game/s8n/scenes/experimental-01/experimental-01.experimental-01",
-            "level_configuration": {
-                "property1": "value1"
-            },
-            "players": [
-                {
-                    "name": "PlayerA",
-                    "ue_path": "/Game/MetaHumans/elisa-001-f1-005/BP_elisa-001-f1-005-HQ.BP_elisa-001-f1-005-HQ",
-                    "face_animations": [{
-                        "ue_path": face_animation_path,
-                        "start_frame": 0,
-                        "end_frame": 300,
-                        "offset": 0
-                    }],
-                    "body_animations": [{
-                        "ue_path": body_anim1_sequence_path,
-                        "start_frame": 0,
-                        "end_frame": 100,
-                        "offset": 0
-                    },
-                        {
-                            "ue_path": body_anim1_sequence_path,
-                            "start_frame": 100,
-                            "end_frame": 300,
-                            "offset": 0
-                        }]
-                }
-            ],
-            "meshes": [],
-        }
-    }
-
-
+    storyboard = {}
     #######################################################################
     # Sequence Instructions
 

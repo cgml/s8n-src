@@ -1,0 +1,1 @@
+C:/s8n/system/tools/ffmpeg/bin/ffmpeg.exe -r 30 -f image2 -s 3840x2160 -i tmp/scene_0000.%%04d.jpeg -vcodec libx264 -crf 1  tmp_mp4/video.mp4

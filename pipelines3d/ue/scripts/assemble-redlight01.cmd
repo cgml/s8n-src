@@ -1,0 +1,1 @@
+C:/s8n/system/tools/ffmpeg/bin/ffmpeg.exe -r 30   -y -gamma 2.2 -s 1920x1080 -i lighting/red-01/light-red-01.%%04d.exr -vcodec libx264  -preset slow -pix_fmt yuv420p  -crf 1 mp4_out/light-red-01.mp4

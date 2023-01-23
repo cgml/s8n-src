@@ -1,0 +1,1 @@
+C:/s8n/system/tools/ffmpeg/bin/ffmpeg.exe -r 30 -f image2 -s 3840x2160 -i mixamo-daz-glute-breast-drapper/back-07.%%04d.jpeg -vcodec libx264 -crf 1  tmp_mp4/mixamo-daz-glute-breast-drapper.mp4

@@ -1,0 +1,1 @@
+C:/s8n/system/tools/ffmpeg/bin/ffmpeg.exe -i tmp_mp4/video.mp4 -i C:\s8n\linux-cp\data\output\audio\mp3\fr60cut_alexberoza_artnow.mp3 -map 0:v -map 1:a -c:v copy -shortest tmp_mp4/video_a.mp4

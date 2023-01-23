@@ -1,0 +1,1 @@
+C:/s8n/system/tools/ffmpeg/bin/ffmpeg.exe -r 30 -f image2 -s 1920x1080 -i mixamo-daz-glute/front-01.%%04d.jpeg -vcodec libx264 -crf 1  tmp_mp4/mixamo-front-hd.mp4

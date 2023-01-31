@@ -6,7 +6,7 @@ class CameraShotStyle:
         self.focal_length = focal_length
         self.UE_CAMERA_SHOT_TYPES = \
             json.loads(
-                open('C:/s8n/system/src/pipelines/s8n-alpha/ue/python/_config/camera_shot_types.json').read()
+                open('C:/s8n/system/s8n-src/pipelines3d/ue/python/_config/camera_shot_types.json').read()
             )
 
 

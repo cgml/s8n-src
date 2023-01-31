@@ -1,8 +1,10 @@
 import os
 import json
-#import numpy as np
+import importlib
 
 import camera_shots
+importlib.reload(camera_shots)
+
 
 class StoryboardAssembler_StaticVideoTemplate:
     '''
@@ -26,10 +28,10 @@ class StoryboardAssembler_StaticVideoTemplate:
 
     # TODO that is simplified hardcoded suequence path
     DEFAULT_SHOT_TYPE_SEQ_PATH = \
-        'C:/s8n/linux-cp/data/output/analysis/video/ariana_grande_v2/ariana_grande_shot_types.csv'
+        'C:/s8n/system-linux/data/output/analysis/video/ariana_grande_v2/ariana_grande_shot_types.csv'
 
     DEFAULT_VIDEO_TEMPLATE_PATH = \
-        'C:/s8n/linux-cp/data/output/analysis/video/ariana_grande_v2/ariana_grande_v2_template.json'
+        'C:/s8n/system-linux/data/output/analysis/video/ariana_grande_v2/ariana_grande_v2_template.json'
 
     VIDEO_TEMPLATE = []
 

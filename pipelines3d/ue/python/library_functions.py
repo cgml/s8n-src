@@ -606,14 +606,7 @@ error_callback.add_callable(movie_error)
 finished_callback = unreal.OnMoviePipelineExecutorFinished()
 finished_callback.add_callable(movie_finished)
 
-def render_sequence_to_images_aa(level_path, sequence_path, output_dir, resolution_width=3840, resolution_height=2160, spatial_sample_count=32):
-    # umap = '/Game/s8n/scenes/experimental-01/experimental-01.experimental-01'
-    # level_sequence = '/Game/S8n-Experimental/x-generated-seq/scene_0000.scene_0000'
-
-    # outdir = "C:/s8n/system/src/x-generated/ue/tmp"  # os.path.abspath(os.path.join(unreal.Paths().project_dir(), 'out'))
-    # fps = 60
-    # frame_count = 120
-
+def render_sequence_to_images_aa_v1(level_path, sequence_path, output_dir, resolution_width=3840, resolution_height=2160, spatial_sample_count=32, preset=None):
     # Get movie queue subsystem for editor.
     subsystem = unreal.get_editor_subsystem(unreal.MoviePipelineQueueSubsystem)
     q = subsystem.get_queue()
@@ -633,26 +626,70 @@ def render_sequence_to_images_aa(level_path, sequence_path, output_dir, resoluti
     output_setting: unreal.MoviePipelineOutputSetting = c.find_or_add_setting_by_class(
         unreal.MoviePipelineOutputSetting)
     output_setting.output_directory = unreal.DirectoryPath(output_dir)
-    output_setting.file_name_format = 'output.{frame_number}'
+    output_setting.file_name_format = 'output.{frame_number}.{frame_number_rel}'
     output_setting.output_resolution.x = resolution_width
     output_setting.output_resolution.y = resolution_height
-    # png_setting=c.find_or_add_setting_by_class(unreal.MoviePipelineImageSequenceOutput_PNG)
     jpg_setting = c.find_or_add_setting_by_class(unreal.MoviePipelineImageSequenceOutput_JPG)
     aa_settings: unreal.MoviePipelineAntiAliasingSetting = c.find_or_add_setting_by_class(
         unreal.MoviePipelineAntiAliasingSetting)
     print(aa_settings)
-    aa_settings.spatial_sample_count = spatial_sample_count
+    aa_settings.spatial_sample_count = 1 # TODO spatial_sample_count
     aa_settings.temporal_sample_count = 1
     aa_settings.override_anti_aliasing = True
     aa_settings.anti_aliasing_method = unreal.AntiAliasingMethod.AAM_NONE
 
 
     executor = subsystem.render_queue_with_executor(unreal.MoviePipelinePIEExecutor)
+
     if executor:
         print('Setting errorr callback and finishied delegate')
         executor.set_editor_property('on_executor_errored_delegate', error_callback)
         executor.set_editor_property('on_executor_finished_delegate', finished_callback)
 
+def render_sequence_to_images_aa(level_path, sequence_path, output_dir, preset, resolution_width=3840, resolution_height=2160, spatial_sample_count=32):
+    assert preset, "Preset must contain path to existing preset"
+    # Get movie queue subsystem for editor.
+    subsystem = unreal.get_editor_subsystem(unreal.MoviePipelineQueueSubsystem)
+    q = subsystem.get_queue()
+    executor = unreal.MoviePipelinePIEExecutor()
+
+    # Optional: empty queue first.
+    for j in q.get_jobs():
+        q.delete_job(j)
+
+    # Create new movie pipeline job
+    job = q.allocate_new_job(unreal.load_class(None, "/Script/MovieRenderPipelineCore.MoviePipelineExecutorJob"))
+    job.set_editor_property('map', unreal.SoftObjectPath(level_path))
+    job.set_editor_property('sequence', unreal.SoftObjectPath(sequence_path))
+
+    config = unreal.load_asset(preset)
+    job.set_configuration(config)
+    c = job.get_configuration()
+    render_pass_settings = c.find_or_add_setting_by_class(unreal.MoviePipelineDeferredPassBase)
+    output_setting: unreal.MoviePipelineOutputSetting = c.find_or_add_setting_by_class(
+        unreal.MoviePipelineOutputSetting)
+    output_setting.output_directory = unreal.DirectoryPath(output_dir)
+    output_setting.file_name_format = 'output.{frame_number}.{frame_number_rel}'
+    # TODO output_setting.output_resolution.x = resolution_width
+    # TODO output_setting.output_resolution.y = resolution_height
+    # jpg_setting = c.find_or_add_setting_by_class(unreal.MoviePipelineImageSequenceOutput_JPG)
+    aa_settings: unreal.MoviePipelineAntiAliasingSetting = c.find_or_add_setting_by_class(
+        unreal.MoviePipelineAntiAliasingSetting)
+    print(aa_settings)
+    aa_settings.spatial_sample_count = 2 # TODO spatial_sample_count
+    aa_settings.temporal_sample_count = 2
+    aa_settings.override_anti_aliasing = True
+    aa_settings.anti_aliasing_method = unreal.AntiAliasingMethod.AAM_MSAA
+
+
+    executor = subsystem.render_queue_with_executor(unreal.MoviePipelinePIEExecutor)
+
+    if executor:
+        print('Setting errorr callback and finishied delegate')
+        executor.set_editor_property('on_executor_errored_delegate', error_callback)
+        executor.set_editor_property('on_executor_finished_delegate', finished_callback)
+
+#
 #
 # def render_with_config(sequence):
 #
